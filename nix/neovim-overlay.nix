@@ -25,6 +25,48 @@ with final.pkgs.lib; let
   #   optional = <true|false>; # Default: false
   #   ...
   # }
+  my-plugins = with pkgs.vimPlugins; [
+    # Plugins for neovim
+    comment-nvim # Allows commenting visual regions or lines
+    eyeliner-nvim # Highlights unique characters for f/F and t/T motions | https://github.com/jinh0/eyeliner.nvim
+    gitsigns-nvim # Adds git related signs to the gutter and utilities for managing changes
+    # Consider removing this in favor of mini.statusline
+    lualine-nvim # Status line | https://github.com/nvim-lualine/lualine.nvim/
+    luasnip # snippets | https://github.com/l3mon4d3/luasnip/
+    #neogit # https://github.com/TimUntersberger/neogit/
+    nvim-treesitter.withAllGrammars # Treesitter syntax highlighting with all grammars
+    telescope-nvim # Fuzzy finder for files, lsp, etc
+    todo-comments-nvim # Highlight TODO and similar comments
+    which-key-nvim
+
+    # nvim-cmp (autocompletion) and extensions
+    nvim-cmp # https://github.com/hrsh7th/nvim-cmp
+    cmp_luasnip # snippets autocompletion extension for nvim-cmp | https://github.com/saadparwaiz1/cmp_luasnip/
+    lspkind-nvim # vscode-like LSP pictograms | https://github.com/onsails/lspkind.nvim/
+    cmp-nvim-lsp # LSP as completion source | https://github.com/hrsh7th/cmp-nvim-lsp/
+    cmp-nvim-lsp-signature-help # https://github.com/hrsh7th/cmp-nvim-lsp-signature-help/
+    cmp-buffer # current buffer as completion source | https://github.com/hrsh7th/cmp-buffer/
+    cmp-path # file paths as completion source | https://github.com/hrsh7th/cmp-path/
+    cmp-nvim-lua # neovim lua API as completion source | https://github.com/hrsh7th/cmp-nvim-lua/
+    cmp-cmdline # cmp command line suggestions
+    cmp-cmdline-history # cmp command line history suggestions
+    # ^ nvim-cmp extensions
+
+    # Themes
+    kanagawa-nvim
+
+    # Dependencies of other plugins - without lazyvim these aren't installed magically
+    nvim-navic # Lualine | Add LSP location to lualine | https://github.com/SmiteshP/nvim-navic nvim-web-devicons # Telescope
+    nvim-treesitter-context # Treesitter | nvim-treesitter-context
+    nvim-ts-context-commentstring # https://github.com/joosepalviste/nvim-ts-context-commentstring/
+    plenary-nvim # Telescope
+    telescope-fzy-native-nvim # Telescope | https://github.com/nvim-telescope/telescope-fzy-native.nvim
+    telescope-ui-select-nvim # Telescope
+
+    # Other plugins to consider
+    # lspconfig - not default in kickstart-nix, but uses mason? Can it work without mason?
+  ];
+
   all-plugins = with pkgs.vimPlugins; [
     # plugins from nixpkgs go in here.
     # https://search.nixos.org/packages?channel=unstable&from=0&size=50&sort=relevance&type=packages&query=vimPlugins
@@ -93,6 +135,15 @@ in {
   # returned by the overlay
   nvim-pkg = mkNeovim {
     plugins = all-plugins;
+    inherit extraPackages;
+  };
+
+  nvim-pkg-myplugins = mkNeovim {
+    plugins = my-plugins;
+    ignoreConfigRegexes = [
+      "^plugin/neogit.lua"
+      "^plugin/statuscol.lua"
+    ];
     inherit extraPackages;
   };
 
