@@ -26,6 +26,12 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+-- Diagnostic keymaps
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
+-- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Show diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>q', toggle_qf_list, { desc = 'Toggle diagnostic [Q]uickfix list' })
 -- Toggle the quickfix list (only opens if it is populated)
 local function toggle_qf_list()
   local qf_exists = false
@@ -43,7 +49,7 @@ local function toggle_qf_list()
   end
 end
 
-keymap.set('n', '<C-c>', toggle_qf_list, { desc = 'toggle quickfix list' })
+-- keymap.set('n', '<C-c>', toggle_qf_list, { desc = 'toggle quickfix list' })
 
 local function try_fallback_notify(opts)
   local success, _ = pcall(opts.try)
@@ -120,9 +126,9 @@ keymap.set('n', '<leader>h-', function()
 end, { silent = true, desc = 'dec window [h]eight' })
 
 -- Close floating windows [Neovim 0.10 and above]
-keymap.set('n', '<leader>fq', function()
-  vim.cmd('fclose!')
-end, { silent = true, desc = '[f]loating windows: [q]uit/close all' })
+-- keymap.set('n', '<leader>fq', function()
+--   vim.cmd('fclose!')
+-- end, { silent = true, desc = '[f]loating windows: [q]uit/close all' })
 
 -- Remap Esc to switch to normal mode and Ctrl-Esc to pass Esc to terminal
 keymap.set('t', '<Esc>', '<C-\\><C-n>', { desc = 'switch to normal mode' })
@@ -142,16 +148,14 @@ keymap.set('n', '<space>tq', vim.cmd.tabclose, { desc = '[t]ab: [q]uit/close' })
 
 local severity = diagnostic.severity
 
-keymap.set('n', '<space>e', function()
-  local _, winid = diagnostic.open_float(nil, { scope = 'line' })
-  if not winid then
-    vim.notify('no diagnostics found', vim.log.levels.INFO)
-    return
-  end
-  vim.api.nvim_win_set_config(winid or 0, { focusable = true })
-end, { noremap = true, silent = true, desc = 'diagnostics floating window' })
-keymap.set('n', '[d', diagnostic.goto_prev, { noremap = true, silent = true, desc = 'previous [d]iagnostic' })
-keymap.set('n', ']d', diagnostic.goto_next, { noremap = true, silent = true, desc = 'next [d]iagnostic' })
+-- keymap.set('n', '<space>e', function()
+--   local _, winid = diagnostic.open_float(nil, { scope = 'line' })
+--   if not winid then
+--     vim.notify('no diagnostics found', vim.log.levels.INFO)
+--     return
+--   end
+--   vim.api.nvim_win_set_config(winid or 0, { focusable = true })
+-- end, { noremap = true, silent = true, desc = 'diagnostics floating window' })
 keymap.set('n', '[e', function()
   diagnostic.goto_prev {
     severity = severity.ERROR,
