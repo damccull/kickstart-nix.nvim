@@ -7,7 +7,9 @@ local g = vim.g
 g.mapleader = ' '
 g.maplocalleader = ' '
 
-opt.compatible = false
+-- Set to true if you have a Nerd Font installed and selected in the terminal
+g.have_nerd_font = true
+
 
 -- Enable true colour support
 if fn.has('termguicolors') then
@@ -15,34 +17,49 @@ if fn.has('termguicolors') then
 end
 
 -- See :h <option> to see what the options do
+-- For more options, you can see `:help option-list`
 
--- Search down into subfolders
-opt.path = vim.o.path .. '**'
-
-opt.number = true
-opt.relativenumber = true
+opt.breakindent = true
+opt.clipboard = 'unnamedplus' -- Use system clipboard by default
+opt.cmdheight = 0
 opt.cursorline = true
-opt.lazyredraw = true
-opt.showmatch = true -- Highlight matching parentheses, etc
-opt.incsearch = true
-opt.hlsearch = true
-
-opt.spell = true
-opt.spelllang = 'en'
-
-opt.expandtab = true
-opt.tabstop = 2
-opt.softtabstop = 2
-opt.shiftwidth = 2
+opt.expandtab = true -- Set tab expansion
+opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 opt.foldenable = true
 opt.history = 2000
-opt.nrformats = 'bin,hex' -- 'octal'
+opt.hlsearch = true -- Highlight on search
+opt.ignorecase = true -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
+opt.inccommand = 'split' -- Preview substitutions live, as you type!
+opt.incsearch = true
+opt.lazyredraw = true
+opt.list = true -- Display of white-space characters -- Display of certain whitespace characters in the editor.
+opt.listchars = 'tab:» ,trail:·,nbsp:␣' -- Display of certain whitespace characters in the editor.
+opt.mouse = 'a' -- Enable mouse mode, can be useful for resizing splits for example!
+opt.nrformats = 'bin,hex' -- Set the number types nvim will be able to increment/decrement
+opt.number = true
+opt.path = vim.o.path .. '**' -- Search down into subfolders
+opt.relativenumber = true
+opt.scrolloff = 10 -- Minimal number of screen lines to keep above and below the cursor.
+opt.signcolumn = 'yes' -- Keep signcolumn on by default
+opt.shiftwidth = 2
+opt.showmatch = true -- Highlight matching parentheses, etc
+-- opt.showmode = false -- Don't show the mode, since it's already in the status line
+opt.smartcase = true -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
+opt.softtabstop = 2
+opt.spell = true
+opt.spelllang = 'en'
+opt.splitbelow = true -- Configure how new splits should be opened
+opt.splitright = true -- Configure how new splits should be opened
+opt.tabstop = 2
+opt.timeoutlen = 300 -- Decrease mapped sequence wait time. Displays which-key popup sooner.
 opt.undofile = true
-opt.splitright = true
-opt.splitbelow = true
-opt.cmdheight = 0
+opt.updatetime = 250 -- Decrease update time for swap file (crash recovery)
+opt.wrap = false -- Turn off word wrap by default.
 
-opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+-- Clear search highlight when pressing <Esc> in normal mode
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+
 
 -- Configure Neovim diagnostic messages
 
