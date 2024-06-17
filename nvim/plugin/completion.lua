@@ -52,54 +52,57 @@ cmp.setup {
       require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
     end,
   },
-  mapping = {
-    ['<C-b>'] = cmp.mapping(function(_)
-      if cmp.visible() then
-        cmp.scroll_docs(-4)
-      else
-        complete_with_source('buffer')
-      end
-    end, { 'i', 'c', 's' }),
-    ['<C-f>'] = cmp.mapping(function(_)
-      if cmp.visible() then
-        cmp.scroll_docs(4)
-      else
-        complete_with_source('path')
-      end
-    end, { 'i', 'c', 's' }),
-    ['<C-n>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      -- expand_or_jumpable(): Jump outside the snippet region
-      -- expand_or_locally_jumpable(): Only jump inside the snippet region
-      elseif luasnip.expand_or_locally_jumpable() then
+  -- For an understanding of why these mappings were
+  -- chosen, you will need to read `:help ins-completion`
+  --
+  -- No, but seriously. Please read `:help ins-completion`, it is really good!
+  mapping = cmp.mapping.preset.insert {
+    -- Select the [n]ext item
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    -- Select the [p]revious item
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+
+    -- Scroll the documentation window [b]ack / [f]orward
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+
+    -- Accept ([y]es) the completion.
+    --  This will auto-import if your LSP supports it.
+    --  This will expand snippets if the LSP sent a snippet.
+    ['<C-y>'] = cmp.mapping.confirm { select = true },
+
+    -- If you prefer more traditional completion keymaps,
+    -- you can uncomment the following lines
+    --['<CR>'] = cmp.mapping.confirm { select = true },
+    --['<Tab>'] = cmp.mapping.select_next_item(),
+    --['<S-Tab>'] = cmp.mapping.select_prev_item(),
+
+    -- Manually trigger a completion from nvim-cmp.
+    --  Generally you don't need this, because nvim-cmp will display
+    --  completions whenever it has completion options available.
+    ['<C-Space>'] = cmp.mapping.complete {},
+
+    -- Think of <c-l> as moving to the right of your snippet expansion.
+    --  So if you have a snippet that's like:
+    --  function $name($args)
+    --    $body
+    --  end
+    --
+    -- <c-l> will move you to the right of each of the expansion locations.
+    -- <c-h> is similar, except moving you backwards.
+    ['<C-l>'] = cmp.mapping(function()
+      if luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
-      elseif has_words_before() then
-        cmp.complete()
-      else
-        fallback()
       end
-    end, { 'i', 'c', 's' }),
-    ['<C-p>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
+    end, { 'i', 's' }),
+    ['<C-h>'] = cmp.mapping(function()
+      if luasnip.locally_jumpable(-1) then
         luasnip.jump(-1)
-      else
-        fallback()
       end
-    end, { 'i', 'c', 's' }),
-    -- toggle completion
-    ['<C-e>'] = cmp.mapping(function(_)
-      if cmp.visible() then
-        cmp.close()
-      else
-        cmp.complete()
-      end
-    end, { 'i', 'c', 's' }),
-    ['<C-y>'] = cmp.mapping.confirm {
-      select = true,
-    },
+    end, { 'i', 's' }),
+
+    -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
+    --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
   },
   sources = cmp.config.sources {
     -- The insertion order influences the priority of the sources
@@ -125,6 +128,7 @@ cmp.setup.filetype('lua', {
   },
 })
 
+-- Autocomplete for command line search
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline({ '/', '?' }, {
   mapping = cmp.mapping.preset.cmdline(),
@@ -138,6 +142,7 @@ cmp.setup.cmdline({ '/', '?' }, {
   },
 })
 
+-- Autocomplete for command line command history
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
   mapping = cmp.mapping.preset.cmdline(),
@@ -148,16 +153,16 @@ cmp.setup.cmdline(':', {
   },
 })
 
-vim.keymap.set({ 'i', 'c', 's' }, '<C-n>', cmp.complete, { noremap = false, desc = '[cmp] complete' })
-vim.keymap.set({ 'i', 'c', 's' }, '<C-f>', function()
-  complete_with_source('path')
-end, { noremap = false, desc = '[cmp] path' })
-vim.keymap.set({ 'i', 'c', 's' }, '<C-o>', function()
-  complete_with_source('nvim_lsp')
-end, { noremap = false, desc = '[cmp] lsp' })
-vim.keymap.set({ 'c' }, '<C-h>', function()
-  complete_with_source('cmdline_history')
-end, { noremap = false, desc = '[cmp] cmdline history' })
-vim.keymap.set({ 'c' }, '<C-c>', function()
-  complete_with_source('cmdline')
-end, { noremap = false, desc = '[cmp] cmdline' })
+-- vim.keymap.set({ 'i', 'c', 's' }, '<C-n>', cmp.complete, { noremap = false, desc = '[cmp] complete' })
+-- vim.keymap.set({ 'i', 'c', 's' }, '<C-f>', function()
+--   complete_with_source('path')
+-- end, { noremap = false, desc = '[cmp] path' })
+-- vim.keymap.set({ 'i', 'c', 's' }, '<C-o>', function()
+--   complete_with_source('nvim_lsp')
+-- end, { noremap = false, desc = '[cmp] lsp' })
+-- vim.keymap.set({ 'c' }, '<C-h>', function()
+--   complete_with_source('cmdline_history')
+-- end, { noremap = false, desc = '[cmp] cmdline history' })
+-- vim.keymap.set({ 'c' }, '<C-c>', function()
+--   complete_with_source('cmdline')
+-- end, { noremap = false, desc = '[cmp] cmdline' })
