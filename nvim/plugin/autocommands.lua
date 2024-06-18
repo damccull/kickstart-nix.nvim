@@ -185,10 +185,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
     if not client then
       return
     end
-    local function buf_refresh_codeLens()
+    local function buf_refresh_codeLens(opts)
       vim.schedule(function()
         if client.server_capabilities.codeLensProvider then
-          vim.lsp.codelens.refresh()
+          vim.lsp.codelens.refresh({bufnr = opts.buf})
           return
         end
       end)
@@ -200,7 +200,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         callback = buf_refresh_codeLens,
         buffer = bufnr,
       })
-      buf_refresh_codeLens()
+      buf_refresh_codeLens({buf = bufnr})
     end
   end,
 })
