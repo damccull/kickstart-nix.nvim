@@ -133,7 +133,7 @@ with final.pkgs.lib; let
 in {
   # This is the neovim derivation
   # returned by the overlay
-  nvim-pkg-default = mkNeovim {
+  nvim-pkg-example = mkNeovim {
     plugins = all-plugins;
     inherit extraPackages;
   };

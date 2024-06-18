@@ -64,9 +64,9 @@
       in
       {
         packages = rec {
-          default = myplugins;
-          nvim = pkgs.nvim-pkg-default;
-          myplugins = pkgs.nvim-pkg;
+          default = nvim;
+          nvim = pkgs.nvim-pkg;
+          example = pkgs.nvim-pkg-example;
         };
         devShells = {
           default = shell;
