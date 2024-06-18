@@ -106,9 +106,9 @@ vim.keymap.set('n', '<leader>sn', function()
   builtin.find_files { cwd = vim.fn.stdpath 'config' }
 end, { desc = '[S]earch [N]eovim files' })
 -------------------------------------
-vim.keymap.set('n', '<leader>tp', function()
-  builtin.find_files()
-end, { desc = '[t]elescope find files - ctrl[p] style' })
+-- vim.keymap.set('n', '<leader>tp', function()
+--   builtin.find_files()
+-- end, { desc = '[t]elescope find files - ctrl[p] style' })
 -- vim.keymap.set('n', '<M-p>', builtin.oldfiles, { desc = '[telescope] old files' })
 -- vim.keymap.set('n', '<C-g>', builtin.live_grep, { desc = '[telescope] live grep' })
 -- vim.keymap.set('n', '<leader>tf', fuzzy_grep, { desc = '[t]elescope [f]uzzy grep' })
@@ -189,8 +189,15 @@ telescope.setup {
       override_generic_sorter = false,
       override_file_sorter = true,
     },
+    ["ui-select"] = {
+      require('telescope.themes').get_dropdown(),
+    },
   },
 }
 
 telescope.load_extension('fzy_native')
 -- telescope.load_extension('smart_history')
+
+-- Enable Telescope extensions if they are installed
+pcall(require('telescope').load_extension, 'fzf')
+pcall(require('telescope').load_extension, 'ui-select')
