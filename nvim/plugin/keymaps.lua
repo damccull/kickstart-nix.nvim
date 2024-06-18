@@ -26,13 +26,6 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
--- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
--- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Show diagnostic [Q]uickfix list' })
-vim.keymap.set('n', '<leader>q', toggle_qf_list, { desc = 'Toggle diagnostic [Q]uickfix list' })
-
 -- Toggle the quickfix list (only opens if it is populated)
 local function toggle_qf_list()
   local qf_exists = false
@@ -51,6 +44,13 @@ local function toggle_qf_list()
 end
 
 -- keymap.set('n', '<C-c>', toggle_qf_list, { desc = 'toggle quickfix list' })
+-- Diagnostic keymaps
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
+-- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Show diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>q', toggle_qf_list, { desc = 'Toggle diagnostic [Q]uickfix list' })
+
 
 local function try_fallback_notify(opts)
   local success, _ = pcall(opts.try)
