@@ -133,12 +133,12 @@ with final.pkgs.lib; let
 in {
   # This is the neovim derivation
   # returned by the overlay
-  nvim-pkg = mkNeovim {
+  nvim-pkg-default = mkNeovim {
     plugins = all-plugins;
     inherit extraPackages;
   };
 
-  nvim-pkg-myplugins = mkNeovim {
+  nvim-pkg = mkNeovim {
     plugins = my-plugins;
     ignoreConfigRegexes = [
       "^plugin/neogit.lua"
