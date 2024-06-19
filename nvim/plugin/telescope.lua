@@ -101,10 +101,13 @@ vim.keymap.set('n', '<leader>s/', function()
   }
 end, { desc = '[S]earch [/] in Open Files' })
 
+-- TODO: See if this can work with nix somehow. It doesn't store config in home directory
+-- but that wouldn't work anyways because it's built instead of being state
 -- Shortcut for searching your Neovim configuration files
-vim.keymap.set('n', '<leader>sn', function()
-  builtin.find_files { cwd = vim.fn.stdpath 'config' }
-end, { desc = '[S]earch [N]eovim files' })
+-- vim.keymap.set('n', '<leader>sn', function()
+--   builtin.find_files { cwd = vim.fn.stdpath 'config' }
+-- end, { desc = '[S]earch [N]eovim files' })
+
 -------------------------------------
 -- vim.keymap.set('n', '<leader>tp', function()
 --   builtin.find_files()
