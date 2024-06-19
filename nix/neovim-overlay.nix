@@ -61,9 +61,6 @@ with final.pkgs.lib; let
     plenary-nvim # Telescope
     telescope-fzy-native-nvim # Telescope | https://github.com/nvim-telescope/telescope-fzy-native.nvim
     telescope-ui-select-nvim # Telescope
-
-    # Other plugins to consider
-    # lspconfig - not default in kickstart-nix, but uses mason? Can it work without mason?
   ];
 
   all-plugins = with pkgs.vimPlugins; [
