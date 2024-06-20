@@ -34,6 +34,7 @@ with final.pkgs.lib; let
     lualine-nvim # Status line | https://github.com/nvim-lualine/lualine.nvim/
     luasnip # snippets | https://github.com/l3mon4d3/luasnip/
     nvim-treesitter.withAllGrammars # Treesitter syntax highlighting with all grammars
+    rustaceanvim # Rust ide capability
     telescope-nvim # Fuzzy finder for files, lsp, etc
     todo-comments-nvim # Highlight TODO and similar comments
     which-key-nvim
