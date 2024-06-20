@@ -28,6 +28,7 @@ with final.pkgs.lib; let
   my-plugins = with pkgs.vimPlugins; [
     # Plugins for neovim
     comment-nvim # Allows commenting visual regions or lines
+    conform-nvim # Autoformatting
     eyeliner-nvim # Highlights unique characters for f/F and t/T motions | https://github.com/jinh0/eyeliner.nvim
     gitsigns-nvim # Adds git related signs to the gutter and utilities for managing changes
     # Consider removing this in favor of mini.statusline
