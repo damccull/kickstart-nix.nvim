@@ -142,9 +142,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- Find references for the word under your cursor.
     keymap.set('n', 'gr', require('telescope.builtin').lsp_references, desc(' [g]et [r]eferences'))
 
-    keymap.set('n', '<leader>f', function()
-      vim.lsp.buf.format { async = true }
-    end, desc(' [f]ormat buffer'))
+    -- keymap.set('n', '<leader>f', function()
+    --   vim.lsp.buf.format { async = true }
+    -- end, desc(' [f]ormat buffer'))
 
     if client and client.server_capabilities.inlayHintProvider then
       keymap.set('n', '<leader>th', function()
@@ -188,7 +188,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local function buf_refresh_codeLens(opts)
       vim.schedule(function()
         if client.server_capabilities.codeLensProvider then
-          vim.lsp.codelens.refresh({bufnr = opts.buf})
+          vim.lsp.codelens.refresh({ bufnr = opts.buf })
           return
         end
       end)
@@ -200,7 +200,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         callback = buf_refresh_codeLens,
         buffer = bufnr,
       })
-      buf_refresh_codeLens({buf = bufnr})
+      buf_refresh_codeLens({ buf = bufnr })
     end
   end,
 })
