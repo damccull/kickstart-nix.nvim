@@ -1,5 +1,5 @@
 # This overlay, when applied to nixpkgs, adds the final neovim derivation to nixpkgs.
-{inputs}: final: prev:
+{ inputs }: final: prev:
 with final.pkgs.lib; let
   pkgs = final;
 
