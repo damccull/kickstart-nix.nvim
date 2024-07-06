@@ -9,6 +9,13 @@ with final.pkgs.lib; let
       inherit pname src;
       version = src.lastModifiedDate;
     };
+  # Use this to create a plugin from a flake input
+  mkNvimPluginNoShebangs = src: pname:
+    pkgs.vimUtils.buildVimPlugin {
+      inherit pname src;
+      version = src.lastModifiedDate;
+      dontPatchShebangs = true;
+    };
 
   # Make sure we use the pinned nixpkgs instance for wrapNeovimUnstable,
   # otherwise it could have an incompatible signature when applying this overlay.
@@ -57,7 +64,7 @@ with final.pkgs.lib; let
 
     # non-nixos-package plugins
     (mkNvimPlugin inputs.remote-nvim "remote-nvim")
-    (mkNvimPlugin inputs.nui "nui")
+    (mkNvimPluginNoShebangs inputs.nui "nui")
 
     # Themes
     kanagawa-nvim
