@@ -99,11 +99,45 @@
         "type": "github"
       }
     },
+    "nui": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1719375254,
+        "narHash": "sha256-o2iNktcWxL0oCtCkbARMiWnTlZA8QWQHy2qeOanBlO4=",
+        "owner": "MunifTanjim",
+        "repo": "nui.nvim",
+        "rev": "61574ce6e60c815b0a0c4b5655b8486ba58089a1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MunifTanjim",
+        "repo": "nui.nvim",
+        "type": "github"
+      }
+    },
+    "remote-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1720060789,
+        "narHash": "sha256-fwe1UigaOb7tNOY+6j93tdKO4X95PQj/kJeSJ/S51LI=",
+        "owner": "amitds1997",
+        "repo": "remote-nvim.nvim",
+        "rev": "3f8263fbb4a004511579f6bf5a2149c5d31709d4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "amitds1997",
+        "repo": "remote-nvim.nvim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
         "gen-luarc": "gen-luarc",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_2",
+        "nui": "nui",
+        "remote-nvim": "remote-nvim"
       }
     },
     "systems": {

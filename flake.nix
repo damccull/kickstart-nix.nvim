@@ -12,6 +12,14 @@
     #   url = "github:Cassin01/wf.nvim";
     #   flake = false;
     # };
+    remote-nvim = {
+      url = "github:amitds1997/remote-nvim.nvim";
+      flake = false;
+    };
+    nui = {
+      url = "github:MunifTanjim/nui.nvim";
+      flake = false;
+    };
   };
 
   outputs =

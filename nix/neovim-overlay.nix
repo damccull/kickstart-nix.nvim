@@ -55,6 +55,10 @@ with final.pkgs.lib; let
     cmp-cmdline-history # cmp command line history suggestions
     # ^ nvim-cmp extensions
 
+    # non-nixos-package plugins
+    (mkNvimPlugin inputs.remote-nvim "remote-nvim")
+    (mkNvimPlugin inputs.nui "nui")
+
     # Themes
     kanagawa-nvim
 
