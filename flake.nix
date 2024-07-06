@@ -12,14 +12,18 @@
     #   url = "github:Cassin01/wf.nvim";
     #   flake = false;
     # };
-    remote-nvim = {
-      url = "github:amitds1997/remote-nvim.nvim";
-      flake = false;
-    };
-    nui = {
-      url = "github:MunifTanjim/nui.nvim";
-      flake = false;
-    };
+
+    # Remote-nvim -- has a problem with copying local config to remote config due to being
+    # on nixos
+    #
+    # remote-nvim = {
+    #   url = "github:amitds1997/remote-nvim.nvim";
+    #   flake = false;
+    # };
+    # nui = {
+    #   url = "github:MunifTanjim/nui.nvim";
+    #   flake = false;
+    # };
   };
 
   outputs =

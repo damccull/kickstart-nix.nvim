@@ -63,8 +63,8 @@ with final.pkgs.lib; let
     # ^ nvim-cmp extensions
 
     # non-nixos-package plugins
-    (mkNvimPlugin inputs.remote-nvim "remote-nvim")
-    (mkNvimPluginNoShebangs inputs.nui "nui")
+    # (mkNvimPluginNoShebangs inputs.remote-nvim "remote-nvim")
+    # (mkNvimPlugin inputs.nui "nui")
 
     # Themes
     kanagawa-nvim
