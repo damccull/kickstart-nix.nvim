@@ -146,6 +146,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     --   vim.lsp.buf.format { async = true }
     -- end, desc(' [f]ormat buffer'))
 
+    -- Enable inlay hints by default but then enable a toggle command
+    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
     if client and client.server_capabilities.inlayHintProvider then
       keymap.set('n', '<leader>th', function()
         local current_setting = vim.lsp.inlay_hint.is_enabled { bufnr = bufnr }
