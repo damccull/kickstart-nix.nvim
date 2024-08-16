@@ -12,10 +12,10 @@
     #   url = "github:Cassin01/wf.nvim";
     #   flake = false;
     # };
-    # eyeliner-nvim = {
-    #   url = "github:jinh0/eyeliner.nvim/0a7edd0aef409d3a647160eed95e7931ff6e4af8";
-    #   flake = false;
-    # };
+    eyeliner-nvim-pinned = {
+      url = "github:jinh0/eyeliner.nvim/7385c1a29091b98ddde186ed2d460a1103643148";
+      flake = false;
+    };
   };
 
   outputs =

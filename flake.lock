@@ -1,5 +1,22 @@
 {
   "nodes": {
+    "eyeliner-nvim-pinned": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1723163995,
+        "narHash": "sha256-PyCcoSC/LeJ/Iuzlm5gd/0lWx8sBS50Vhe7wudgZzqM=",
+        "owner": "jinh0",
+        "repo": "eyeliner.nvim",
+        "rev": "7385c1a29091b98ddde186ed2d460a1103643148",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jinh0",
+        "repo": "eyeliner.nvim",
+        "rev": "7385c1a29091b98ddde186ed2d460a1103643148",
+        "type": "github"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": "nixpkgs-lib"
@@ -101,6 +118,7 @@
     },
     "root": {
       "inputs": {
+        "eyeliner-nvim-pinned": "eyeliner-nvim-pinned",
         "flake-utils": "flake-utils",
         "gen-luarc": "gen-luarc",
         "nixpkgs": "nixpkgs_2"
