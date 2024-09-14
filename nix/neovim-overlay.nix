@@ -153,6 +153,7 @@ in
     inherit extraPackages;
   };
 
+  # This is the neovim derivation actually used
   nvim-pkg = mkNeovim {
     plugins = my-plugins;
     ignoreConfigRegexes = [
@@ -164,7 +165,7 @@ in
 
   # This can be symlinked in the devShell's shellHook
   nvim-luarc-json = final.mk-luarc-json {
-    plugins = all-plugins;
+    plugins = my-plugins;
   };
 
   # You can add as many derivations as you like.
