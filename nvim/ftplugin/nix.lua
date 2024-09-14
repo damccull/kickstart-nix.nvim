@@ -18,7 +18,7 @@ vim.lsp.start {
   settings = {
     ['nil'] = {
       formatting = {
-        command = { "nixpkgs-fmt" },
+        command = { "nixfmt" },
       },
     },
   },
