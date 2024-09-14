@@ -19,11 +19,12 @@
   };
 
   outputs =
-    inputs @ { self
-    , nixpkgs
-    , flake-utils
-    , gen-luarc
-    , ...
+    inputs@{
+      self,
+      nixpkgs,
+      flake-utils,
+      gen-luarc,
+      ...
     }:
     let
       supportedSystems = [
@@ -36,8 +37,8 @@
       # This is where the Neovim derivation is built.
       neovim-overlay = import ./nix/neovim-overlay.nix { inherit inputs; };
     in
-    flake-utils.lib.eachSystem supportedSystems
-      (system:
+    flake-utils.lib.eachSystem supportedSystems (
+      system:
       let
         pkgs = import nixpkgs {
           inherit system;
@@ -75,7 +76,8 @@
         devShells = {
           default = shell;
         };
-      })
+      }
+    )
     // {
       # You can add this overlay to your NixOS configuration
       overlays.default = neovim-overlay;
