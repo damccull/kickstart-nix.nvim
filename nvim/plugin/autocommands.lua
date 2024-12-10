@@ -152,7 +152,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       keymap.set('n', '<leader>th', function()
         local current_setting = vim.lsp.inlay_hint.is_enabled { bufnr = bufnr }
         vim.lsp.inlay_hint.enable(not current_setting, { bufnr = bufnr })
-      end, desc('[t]oggle [i]nlay hints'))
+      end, desc('[t]oggle inlay [h]ints'))
     end
 
     -- The following two autocommands are used to highlight references of the
