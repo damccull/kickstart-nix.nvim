@@ -49,6 +49,7 @@ let
     # Consider removing this in favor of mini.statusline
     lualine-nvim # Status line | https://github.com/nvim-lualine/lualine.nvim/
     luasnip # snippets | https://github.com/l3mon4d3/luasnip/
+    mini-surround
     nvim-treesitter.withAllGrammars # Treesitter syntax highlighting with all grammars
     rustaceanvim # Rust ide capability
     telescope-nvim # Fuzzy finder for files, lsp, etc
