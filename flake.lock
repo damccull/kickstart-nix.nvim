@@ -217,7 +217,8 @@
         "eyeliner-nvim-pinned": "eyeliner-nvim-pinned",
         "flake-utils": "flake-utils",
         "gen-luarc": "gen-luarc",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_2",
+        "web-tools": "web-tools"
       }
     },
     "systems": {
@@ -232,6 +233,22 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "web-tools": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1741919022,
+        "narHash": "sha256-KJk0OmdkywjUu6mofBq4NYpLofHe7bv/LJXg8MFme/g=",
+        "owner": "ray-x",
+        "repo": "web-tools.nvim",
+        "rev": "2f895049d3b6e3a0b2cedfa18c8733b36fb6cbda",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ray-x",
+        "repo": "web-tools.nvim",
         "type": "github"
       }
     }

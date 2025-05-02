@@ -43,6 +43,7 @@ let
     conform-nvim # Autoformatting
     # eyeliner-nvim # Highlights unique characters for f/F and t/T motions | https://github.com/jinh0/eyeliner.nvim
     (mkNvimPlugin inputs.eyeliner-nvim-pinned "eyeliner.nvim")
+    (mkNvimPlugin inputs.web-tools "web-tools.nvim")
     fidget-nvim # UI for Neovim notifications and LSP status/progress
     gitsigns-nvim # Adds git related signs to the gutter and utilities for managing changes
     indent-blankline-nvim

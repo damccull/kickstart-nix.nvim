@@ -16,6 +16,10 @@
       url = "github:jinh0/eyeliner.nvim/7385c1a29091b98ddde186ed2d460a1103643148";
       flake = false;
     };
+    web-tools = {
+      url = "github:ray-x/web-tools.nvim";
+      flake = false;
+    };
   };
 
   outputs =
