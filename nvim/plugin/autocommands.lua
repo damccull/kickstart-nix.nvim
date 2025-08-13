@@ -85,7 +85,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- Jump to the type of the word under your cursor.
     --  Useful when you're not sure what type a variable is and you want to see
     --  the definition of its *type*, not where it was *defined*.
-    keymap.set('n', '<leader>gt', require('telescope.builtin').lsp_type_definitions,
+    keymap.set('n', 'gt', require('telescope.builtin').lsp_type_definitions,
       desc(' [g]o to [t]ype definition'))
 
     -- Opens a popup that displays documentation about the word under your cursor
@@ -107,14 +107,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
     keymap.set('n', 'gsh', vim.lsp.buf.signature_help, desc(' signature help'))
 
     -- Adds a folder to the workspace.
-    keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, desc(' add [w]orksp[a]ce folder'))
+    keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, desc(' workspace [a]dd folder'))
 
     -- Removes a folder from the workspace.
-    keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, desc(' [w]orkspace folder [r]emove'))
+    keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, desc(' workspace folder [r]emove'))
 
     keymap.set('n', '<leader>wl', function()
       vim.print(vim.lsp.buf.list_workspace_folders())
-    end, desc(' [w]orkspace folders [l]ist'))
+    end, desc(' workspace folders [l]ist'))
 
     -- Rename the variable under your cursor.
     --  Most Language Servers support renaming across files, etc.
@@ -122,8 +122,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     -- Fuzzy find all the symbols in your current workspace.
     --  Similar to document symbols, except searches over your entire project.
-    keymap.set('n', '<leader>wq', require('telescope.builtin').lsp_dynamic_workspace_symbols,
-      desc(' [w]orkspace symbol [q]'))
+    keymap.set('n', '<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols,
+      desc(' workspace symbol [s]'))
 
     -- Fuzzy find all the symbols in your current document.
     --  Symbols are things like variables, functions, types, etc.
