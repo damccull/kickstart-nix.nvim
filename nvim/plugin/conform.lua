@@ -7,6 +7,7 @@ vim.g.did_load_conform_plugin = true
 require('conform').setup({
   formatters_by_ft = {
     lua = { "stylua" },
+    toml = { "taplo" },
     -- Conform can also run multiple formatters sequentially
     -- python = { "isort", "black" },
     --
@@ -17,6 +18,13 @@ require('conform').setup({
     --   timeout_ms = 500,
     --   lsp_format = "fallback",
     -- },
+  },
+  formatters = {
+    taplo = {
+      command = "taplo",
+      args = { "fmt", "-" },
+      stdin = true,
+    },
   },
   format_on_save = function(bufnr)
     -- Disable "format_on_save lsp_fallback" for languages that don't
