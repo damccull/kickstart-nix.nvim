@@ -91,7 +91,7 @@ let
     lua-language-server
     nil # nix LSP
     nixfmt-rfc-style
-    taplo-cli # TOML formatter and LSP
+    taplo # TOML formatter and LSP
     zig
   ];
 in
