@@ -90,7 +90,7 @@ let
     # language servers, etc.
     lua-language-server
     nil # nix LSP
-    nixfmt-rfc-style
+    nixfmt
     taplo # TOML formatter and LSP
     zig
   ];
