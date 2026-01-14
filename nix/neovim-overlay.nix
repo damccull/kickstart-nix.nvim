@@ -52,6 +52,7 @@ let
     luasnip # snippets | https://github.com/l3mon4d3/luasnip/
     mini-surround
     nvim-treesitter.withAllGrammars # Treesitter syntax highlighting with all grammars
+    nvim-treesitter-textobjects # textobjects plugin for treesitter
     rustaceanvim # Rust ide capability
     telescope-nvim # Fuzzy finder for files, lsp, etc
     todo-comments-nvim # Highlight TODO and similar comments
