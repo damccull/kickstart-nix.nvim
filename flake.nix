@@ -1,5 +1,5 @@
 {
-  description = "Neovim derivation";
+  description = "damccull neovim kickstart";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -27,21 +27,15 @@
       self,
       nixpkgs,
       flake-utils,
-      gen-luarc,
       ...
     }:
     let
-      supportedSystems = [
-        "x86_64-linux"
-        "aarch64-linux"
-        "x86_64-darwin"
-        "aarch64-darwin"
-      ];
+      systems = builtins.attrNames nixpkgs.legacyPackages;
 
       # This is where the Neovim derivation is built.
       neovim-overlay = import ./nix/neovim-overlay.nix { inherit inputs; };
     in
-    flake-utils.lib.eachSystem supportedSystems (
+    flake-utils.lib.eachSystem systems (
       system:
       let
         pkgs = import nixpkgs {
@@ -52,7 +46,7 @@
             # This adds a function can be used to generate a .luarc.json
             # containing the Neovim API all plugins in the workspace directory.
             # The generated file can be symlinked in the devShell's shellHook.
-            gen-luarc.overlays.default
+            inputs.gen-luarc.overlays.default
           ];
         };
         shell = pkgs.mkShell {
@@ -64,10 +58,13 @@
             stylua
             luajitPackages.luacheck
             nixpkgs-fmt
+            nvim-dev
           ];
           shellHook = ''
             # symlink the .luarc.json generated in the overlay
             ln -fs ${pkgs.nvim-luarc-json} .luarc.json
+            # allow quick iteration of the lua configs
+            ln -Tfns $PWD/nvim ~/.config/nvim-dev
           '';
         };
       in
@@ -75,7 +72,6 @@
         packages = rec {
           default = nvim;
           nvim = pkgs.nvim-pkg;
-          example = pkgs.nvim-pkg-example;
         };
         devShells = {
           default = shell;

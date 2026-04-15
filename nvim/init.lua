@@ -1,18 +1,18 @@
+vim.loader.enable()
+
 local cmd = vim.cmd
-local fn = vim.fn
 local opt = vim.o
-local g = vim.g
 
 -- <leader> key. Defaults to `\`. Some people prefer space.
-g.mapleader = ' '
-g.maplocalleader = ' '
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-g.have_nerd_font = true
+vim.g.have_nerd_font = true
 
 
 -- Enable true colour support
-if fn.has('termguicolors') then
+if vim.fn.has('termguicolors') then
   opt.termguicolors = true
 end
 
@@ -22,13 +22,14 @@ end
 opt.breakindent = true
 opt.clipboard = 'unnamedplus' -- Use system clipboard by default
 opt.cmdheight = 0
+opt.colorcolumn = '100'       -- vertical line to show character width
 opt.cursorline = true
-opt.expandtab = true -- Set tab expansion
+opt.expandtab = true          -- Set tab expansion
 opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 opt.foldenable = true
 opt.history = 2000
-opt.hlsearch = true -- Highlight on search
-opt.ignorecase = true -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
+opt.hlsearch = true      -- Highlight on search
+opt.ignorecase = true    -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 opt.inccommand = 'split' -- Preview substitutions live, as you type!
 opt.incsearch = true
 opt.lazyredraw = true
@@ -51,10 +52,10 @@ opt.spelllang = 'en'
 opt.splitbelow = true -- Configure how new splits should be opened
 opt.splitright = true -- Configure how new splits should be opened
 opt.tabstop = 2
-opt.timeoutlen = 300 -- Decrease mapped sequence wait time. Displays which-key popup sooner.
+opt.timeoutlen = 300  -- Decrease mapped sequence wait time. Displays which-key popup sooner.
 opt.undofile = true
-opt.updatetime = 250 -- Decrease update time for swap file (crash recovery)
-opt.wrap = false -- Turn off word wrap by default.
+opt.updatetime = 250  -- Decrease update time for swap file (crash recovery)
+opt.wrap = false      -- Turn off word wrap by default.
 
 -- Clear search highlight when pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
@@ -109,9 +110,8 @@ vim.diagnostic.config {
   },
 }
 
-g.editorconfig = true
+vim.g.editorconfig = true
 
-vim.opt.colorcolumn = '100'
 
 -- Native plugins
 cmd.filetype('plugin', 'indent', 'on')

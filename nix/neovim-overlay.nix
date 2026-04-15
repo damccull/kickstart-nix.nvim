@@ -12,6 +12,7 @@ let
       inherit pname src;
       version = src.lastModifiedDate;
     };
+
   # Use this to create a plugin from a flake input
   mkNvimPluginNoShebangs =
     src: pname:
@@ -23,10 +24,12 @@ let
 
   # Make sure we use the pinned nixpkgs instance for wrapNeovimUnstable,
   # otherwise it could have an incompatible signature when applying this overlay.
-  pkgs-wrapNeovim = inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+  pkgs-locked = inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 
   # This is the helper function that builds the Neovim derivation.
-  mkNeovim = pkgs.callPackage ./mkNeovim.nix { inherit pkgs-wrapNeovim; };
+  mkNeovim = pkgs.callPackage ./mkNeovim.nix {
+    inherit (pkgs-locked) wrapNeovimUnstable neovimUtils;
+  };
 
   # A plugin can either be a package or an attrset, such as
   # { plugin = <plugin>; # the package, e.g. pkgs.vimPlugins.nvim-cmp
@@ -37,26 +40,14 @@ let
   #   ...
   # }
   my-plugins = with pkgs.vimPlugins; [
-    # Plugins for neovim
-    nvim-autopairs
-    comment-nvim # Allows commenting visual regions or lines
-    conform-nvim # Autoformatting
-    # eyeliner-nvim # Highlights unique characters for f/F and t/T motions | https://github.com/jinh0/eyeliner.nvim
-    (mkNvimPlugin inputs.eyeliner-nvim-pinned "eyeliner.nvim")
-    (mkNvimPlugin inputs.web-tools "web-tools.nvim")
-    fidget-nvim # UI for Neovim notifications and LSP status/progress
-    gitsigns-nvim # Adds git related signs to the gutter and utilities for managing changes
-    indent-blankline-nvim
-    # Consider removing this in favor of mini.statusline
-    lualine-nvim # Status line | https://github.com/nvim-lualine/lualine.nvim/
-    luasnip # snippets | https://github.com/l3mon4d3/luasnip/
-    mini-surround
+    # Treesitter plugins
     nvim-treesitter.withAllGrammars # Treesitter syntax highlighting with all grammars
     nvim-treesitter-textobjects # textobjects plugin for treesitter
-    rustaceanvim # Rust ide capability
-    telescope-nvim # Fuzzy finder for files, lsp, etc
-    todo-comments-nvim # Highlight TODO and similar comments
-    which-key-nvim
+    nvim-treesitter-context # Treesitter | nvim-treesitter-context
+    nvim-ts-context-commentstring # https://github.com/joosepalviste/nvim-ts-context-commentstring/
+    # ^ Treesitter plugins
+
+    luasnip # snippets | https://github.com/l3mon4d3/luasnip/
 
     # nvim-cmp (autocompletion) and extensions
     nvim-cmp # https://github.com/hrsh7th/nvim-cmp
@@ -71,20 +62,56 @@ let
     cmp-cmdline-history # cmp command line history suggestions
     # ^ nvim-cmp extensions
 
-    # non-nixos-package plugins
-    # (mkNvimPluginNoShebangs inputs.remote-nvim "remote-nvim")
-    # (mkNvimPlugin inputs.nui "nui")
+    # git integrations
+    gitsigns-nvim # Adds git related signs to the gutter and utilities for managing changes
+    diffview-nvim # https://github.com/sindrets/diffview.nvim
+    neogit # https://github.com/TimUntersberger/neogit
+    vim-fugitive # https://github.com/tpope/vim-fugitive
+    # ^ git integrations
+
+    # Telescope and extensions
+    telescope-nvim # Fuzzy finder for files, lsp, etc
+    telescope-fzy-native-nvim
+    telescope-ui-select-nvim # Telescope
+    # telescope-smart-history-nvim # https://github.com/nvim-telescope/telescope-smart-history.nvim
+    # ^ Telescope and extensions
+
+    # UI
+    fidget-nvim # UI for Neovim notifications and LSP status/progress
+    lualine-nvim # Status line | https://github.com/nvim-lualine/lualine.nvim/
+    nvim-navic # Lualine | Add LSP location to lualine | https://github.com/SmiteshP/nvim-navic nvim-web-devicons # Telescope
+    statuscol-nvim # Status column | https://github.com/luukvbaal/statuscol.nvim
+    todo-comments-nvim # Highlight TODO and similar comments
+    which-key-nvim # Shows a menu of keybinds
+
+    # eyeliner-nvim # Highlights unique characters for f/F and t/T motions | https://github.com/jinh0/eyeliner.nvim
+    (mkNvimPlugin inputs.eyeliner-nvim-pinned "eyeliner.nvim")
+    # ^ UI
+
+    # Language support
+    rustaceanvim # Rust ide capability
+    # ^ Language support
+
+    # Navigation and editing enhancements
+    comment-nvim # Allows commenting visual regions or lines
+    conform-nvim # Autoformatting
+    indent-blankline-nvim
+    mini-surround # Consider removing this in favor of mini.statusline
+    nvim-autopairs
+    nvim-unception # Prevent nested neovim sessions
+    (mkNvimPlugin inputs.web-tools "web-tools.nvim") # Web editing
+    # ^ Navigation and editing enhancements
 
     # Themes
     kanagawa-nvim
+    # ^ Themes
 
     # Dependencies of other plugins - without lazyvim these aren't installed magically
-    nvim-navic # Lualine | Add LSP location to lualine | https://github.com/SmiteshP/nvim-navic nvim-web-devicons # Telescope
-    nvim-treesitter-context # Treesitter | nvim-treesitter-context
-    nvim-ts-context-commentstring # https://github.com/joosepalviste/nvim-ts-context-commentstring/
+    nvim-web-devicons
     plenary-nvim # Telescope
-    telescope-fzy-native-nvim # Telescope | https://github.com/nvim-telescope/telescope-fzy-native.nvim
-    telescope-ui-select-nvim # Telescope
+    sqlite-lua
+    vim-repeat
+    # ^ Dependencies
   ];
 
   extraPackages = with pkgs; [
@@ -97,21 +124,22 @@ let
   ];
 in
 {
-  # This is the neovim derivation
-  # returned by the overlay
-  nvim-pkg-example = mkNeovim {
-    plugins = all-plugins;
-    inherit extraPackages;
-  };
 
-  # This is the neovim derivation actually used
+  # This is the neovim derivation returned by the overlay
   nvim-pkg = mkNeovim {
     plugins = my-plugins;
+    inherit extraPackages;
     ignoreConfigRegexes = [
       "^plugin/neogit.lua"
       "^plugin/statuscol.lua"
     ];
+  };
+
+  nvim-dev = mkNeovim {
+    plugs = my-plugins;
     inherit extraPackages;
+    appName = "nvim-dev";
+    wrapRc = false;
   };
 
   # This can be symlinked in the devShell's shellHook
