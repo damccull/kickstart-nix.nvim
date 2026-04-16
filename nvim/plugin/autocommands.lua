@@ -142,9 +142,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- Find references for the word under your cursor.
     keymap.set('n', 'gr', require('telescope.builtin').lsp_references, desc(' [g]et [r]eferences'))
 
-    -- keymap.set('n', '<leader>f', function()
-    --   vim.lsp.buf.format { async = true }
-    -- end, desc(' [f]ormat buffer'))
+    keymap.set('n', '<leader>fb', function()
+      vim.lsp.buf.format { async = true }
+    end, desc(' [f]ormat [b]uffer'))
 
     -- Enable inlay hints by default but then enable a toggle command
     vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
