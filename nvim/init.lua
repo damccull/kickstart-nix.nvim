@@ -57,6 +57,10 @@ opt.undofile = true
 opt.updatetime = 250  -- Decrease update time for swap file (crash recovery)
 opt.wrap = false      -- Turn off word wrap by default.
 
+-- Disable the welcome screen message
+vim.opt.shortmess:append("I")
+
+
 -- Clear search highlight when pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
