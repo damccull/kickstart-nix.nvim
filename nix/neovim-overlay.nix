@@ -136,7 +136,7 @@ in
   };
 
   nvim-dev = mkNeovim {
-    plugs = my-plugins;
+    plugins = my-plugins;
     inherit extraPackages;
     appName = "nvim-dev";
     wrapRc = false;
