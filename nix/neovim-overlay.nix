@@ -71,7 +71,8 @@ let
 
     # Telescope and extensions
     telescope-nvim # Fuzzy finder for files, lsp, etc
-    telescope-fzy-native-nvim
+    # ### swap from fzy-native to fzy-lua because of portability across systems
+    # telescope-fzy-native-nvim
     telescope-ui-select-nvim # Telescope
     # telescope-smart-history-nvim # https://github.com/nvim-telescope/telescope-smart-history.nvim
     # ^ Telescope and extensions
@@ -124,6 +125,8 @@ let
   ];
 in
 {
+  # Make plugins list visible to flake for bundle-pack
+  nvim-plugins = my-plugins;
 
   # This is the neovim derivation returned by the overlay
   nvim-pkg = mkNeovim {
