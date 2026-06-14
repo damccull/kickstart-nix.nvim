@@ -122,6 +122,7 @@ let
     nixfmt
     stylua
     taplo # TOML formatter and LSP
+    vscode-langservers-extracted
     zig
   ];
 in
