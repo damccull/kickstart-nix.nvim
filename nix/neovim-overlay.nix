@@ -120,6 +120,7 @@ let
     lua-language-server
     nil # nix LSP
     nixfmt
+    stylua
     taplo # TOML formatter and LSP
     zig
   ];
