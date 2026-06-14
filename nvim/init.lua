@@ -10,7 +10,6 @@ vim.g.maplocalleader = ' '
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
-
 -- Enable true colour support
 if vim.fn.has('termguicolors') then
   opt.termguicolors = true
@@ -22,14 +21,14 @@ end
 opt.breakindent = true
 opt.clipboard = 'unnamedplus' -- Use system clipboard by default
 opt.cmdheight = 0
-opt.colorcolumn = '100'       -- vertical line to show character width
+opt.colorcolumn = '100' -- vertical line to show character width
 opt.cursorline = true
-opt.expandtab = true          -- Set tab expansion
+opt.expandtab = true -- Set tab expansion
 opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 opt.foldenable = true
 opt.history = 2000
-opt.hlsearch = true      -- Highlight on search
-opt.ignorecase = true    -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
+opt.hlsearch = true -- Highlight on search
+opt.ignorecase = true -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 opt.inccommand = 'split' -- Preview substitutions live, as you type!
 opt.incsearch = true
 opt.lazyredraw = true
@@ -52,19 +51,16 @@ opt.spelllang = 'en'
 opt.splitbelow = true -- Configure how new splits should be opened
 opt.splitright = true -- Configure how new splits should be opened
 opt.tabstop = 2
-opt.timeoutlen = 300  -- Decrease mapped sequence wait time. Displays which-key popup sooner.
+opt.timeoutlen = 300 -- Decrease mapped sequence wait time. Displays which-key popup sooner.
 opt.undofile = true
-opt.updatetime = 250  -- Decrease update time for swap file (crash recovery)
-opt.wrap = false      -- Turn off word wrap by default.
+opt.updatetime = 250 -- Decrease update time for swap file (crash recovery)
+opt.wrap = false -- Turn off word wrap by default.
 
 -- Disable the welcome screen message
-vim.opt.shortmess:append("I")
-
+vim.opt.shortmess:append('I')
 
 -- Clear search highlight when pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-
-
 
 -- Configure Neovim diagnostic messages
 
@@ -115,7 +111,6 @@ vim.diagnostic.config {
 }
 
 vim.g.editorconfig = true
-
 
 -- Native plugins
 cmd.filetype('plugin', 'indent', 'on')
