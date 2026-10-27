@@ -135,8 +135,8 @@ in
     plugins = my-plugins;
     inherit extraPackages;
     ignoreConfigRegexes = [
-      "^plugin/neogit.lua"
-      "^plugin/statuscol.lua"
+      # "^plugin/neogit.lua"
+      # "^plugin/statuscol.lua"
     ];
   };
 
